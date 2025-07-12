@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floral Maxi Dress - ReWear</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-outline:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      /* Search Bar */
+      .search-section {
+        background: white;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .search-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .search-bar {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border: 2px solid #ddd;
+        border-radius: 50px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .search-input:focus {
+        border-color: #667eea;
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #667eea;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        background: white;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .breadcrumb-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .breadcrumb-nav a {
+        color: #667eea;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .breadcrumb-nav a:hover {
+        color: #5a67d8;
+      }
+
+      .breadcrumb-separator {
+        color: #ccc;
+      }
+
+      /* Main Content */
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .product-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      /* Product Images */
+      .product-images {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 500px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .main-image:hover {
+        transform: scale(1.02);
+      }
+
+      .image-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #667eea;
+        padding: 8px 15px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .thumbnail-gallery {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 10px 0;
+      }
+
+      .thumbnail {
+        min-width: 80px;
+        height: 80px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0.7;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      /* Product Details */
+      .product-details {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .product-header {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+      }
+
+      .product-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .product-points {
+        font-size: 1.8rem;
+        color: #667eea;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .product-meta {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .meta-item {
+        background: #f8f9fa;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .meta-item strong {
+        color: #333;
+      }
+
+      .product-description {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .description-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .description-text {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+
+      .product-specs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .spec-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .spec-label {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .spec-value {
+        color: #666;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn-large {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        font-weight: 600;
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .btn-exchange {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .btn-exchange:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-wishlist {
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-wishlist:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Seller Info */
+      .seller-info {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .seller-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .seller-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .seller-details h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .seller-rating {
+        color: #ffc107;
+        font-size: 0.9rem;
+      }
+
+      .seller-stats {
+        display: flex;
+        gap: 30px;
+        margin-top: 15px;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #667eea;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Related Items */
+      .related-section {
+        margin-top: 80px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .related-item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .related-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .related-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+      }
+
+      .related-info {
+        padding: 20px;
+      }
+
+      .related-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .related-points {
+        color: #667eea;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 968px) {
+        .product-container {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .main-image {
+          height: 400px;
+          font-size: 4rem;
+        }
+
+        .product-specs {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .product-title {
+          font-size: 1.8rem;
+        }
+
+        .product-points {
+          font-size: 1.5rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .btn-large {
+          min-width: auto;
+        }
+
+        .seller-stats {
+          gap: 20px;
+        }
+
+        .related-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-content {
+          flex-direction: column;
+          height: auto;
+          padding: 15px 20px;
+        }
+
+        .auth-buttons {
+          margin-top: 15px;
+        }
+
+        .main-content {
+          padding: 20px 15px;
+        }
+
+        .product-container {
+          gap: 30px;
+        }
+
+        .main-image {
+          height: 300px;
+          font-size: 3rem;
+        }
+
+        .product-meta {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .product-description,
+        .seller-info {
+          padding: 20px;
+        }
+
+        .seller-header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .seller-stats {
+          justify-content: center;
+        }
+
+        .related-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <a href="#" class="logo">ReWear</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#browse">Browse</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <a href="#" class="btn btn-outline">Login</a>
+          <a href="#" class="btn btn-primary">Sign Up</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-container">
+        <div class="search-bar">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for clothing items..."
+          />
+          <span class="search-icon">🔍</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+      <div class="breadcrumb-container">
+        <nav class="breadcrumb-nav">
+          <a href="#">Home</a>
+          <span class="breadcrumb-separator">></span>
+          <a href="#">Dresses</a>
+          <span class="breadcrumb-separator">></span>
+          <span>Floral Maxi Dress</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="product-container">
+        <!-- Product Images -->
+        <div class="product-images">
+          <div class="main-image">
+            👗
+            <div class="image-badge">New</div>
+          </div>
+          <div class="thumbnail-gallery">
+            <div class="thumbnail active">👗</div>
+            <div class="thumbnail">🌸</div>
+            <div class="thumbnail">👕</div>
+            <div class="thumbnail">🔍</div>
+          </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-details">
+          <div class="product-header">
+            <h1 class="product-title">Floral Maxi Dress</h1>
+            <div class="product-points">50 Points</div>
+            <div class="product-meta">
+              <span class="meta-item"><strong>Size:</strong> Medium</span>
+              <span class="meta-item"><strong>Brand:</strong> Zara</span>
+              <span class="meta-item"
+                ><strong>Condition:</strong> Excellent</span
+              >
+              <span class="meta-item"
+                ><strong>Color:</strong> Floral Print</span
+              >
+            </div>
+          </div>
+
+          <div class="product-description">
+            <h3 class="description-title">Description</h3>
+            <p class="description-text">
+              Beautiful floral maxi dress perfect for summer occasions. This
+              elegant piece features a flowing silhouette with a comfortable
+              fit. The vibrant floral print adds a touch of femininity and
+              style. Made from high-quality materials, this dress has been
+              gently worn and is in excellent condition.
+            </p>
+            <div class="product-specs">
+              <div class="spec-item">
+                <span class="spec-label">Material:</span>
+                <span class="spec-value">100% Cotton</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Season:</span>
+                <span class="spec-value">Spring/Summer</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Care:</span>
+                <span class="spec-value">Machine Wash</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Length:</span>
+                <span class="spec-value">Full Length</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <a href="#" class="btn btn-large btn-exchange">Exchange Now</a>
+            <a href="#" class="btn btn-large btn-wishlist">Add to Wishlist</a>
+          </div>
+
+          <div class="seller-info">
+            <div class="seller-header">
+              <div class="seller-avatar">👤</div>
+              <div class="seller-details">
+                <h3>Sarah Johnson</h3>
+                <div class="seller-rating">⭐⭐⭐⭐⭐ 4.9 (127 reviews)</div>
+              </div>
+            </div>
+            <div class="seller-stats">
+              <div class="stat-item">
+                <div class="stat-number">250+</div>
+                <div class="stat-label">Items Traded</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success Rate</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">2 Years</div>
+                <div class="stat-label">Member Since</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Items -->
+      <section class="related-section">
+        <h2 class="section-title">Similar Items</h2>
+        <div class="related-grid">
+          <div class="related-item">
+            <div class="related-image">👗</div>
+            <div class="related-info">
+              <div class="related-title">Summer Floral Dress</div>
+              <div class="related-points">45 Points</div>
+            </div>
+          </div>
+          <div class="related-item">
+            <div class="related-image">👗</div>
+            <div class="related-info">
+              <div class="related-title">Elegant Maxi Dress</div>
+              <div class="related-points">55 Points</div>
+            </div>
+          </div>
+          <div class="related-item">
+            <div class="related-image">👗</div>
+            <div class="related-info">
+              <div class="related-title">Casual Summer Dress</div>
+              <div class="related-points">40 Points</div>
+            </div>
+          </div>
+          <div class="related-item">
+            <div class="related-image">👗</div>
+            <div class="related-info">
+              <div class="related-title">Vintage Floral Dress</div>
+              <div class="related-points">60 Points</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Thumbnail gallery functionality
+      const thumbnails = document.querySelectorAll(".thumbnail");
+      const mainImage = document.querySelector(".main-image");
+
+      thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          // Remove active class from all thumbnails
+          thumbnails.forEach((t) => t.classList.remove("active"));
+          // Add active class to clicked thumbnail
+          thumb.classList.add("active");
+
+          // Update main image (in a real app, this would change the actual image)
+          console.log(`Switched to image ${index + 1}`);
+        });
+      });
+
+      // Search functionality
+      document
+        .querySelector(".search-input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            alert(`Searching for: "${this.value}"`);
+          }
+        });
+
+      // Action buttons
+      document
+        .querySelector(".btn-exchange")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          alert(
+            "Exchange process initiated! This would open the exchange flow."
+          );
+        });
+
+      document
+        .querySelector(".btn-wishlist")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          alert("Added to wishlist!");
+          this.textContent = "Added to Wishlist ❤️";
+          this.style.background = "#667eea";
+          this.style.color = "white";
+        });
+
+      // Related items click handlers
+      document.querySelectorAll(".related-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const title = this.querySelector(".related-title").textContent;
+          alert(`Navigating to: ${title}`);
+        });
+      });
+    </script>
+  </body>
+</html>

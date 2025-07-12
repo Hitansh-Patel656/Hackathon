@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard - ReWear</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .points-badge {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* Main Content */
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .dashboard-header {
+        margin-bottom: 40px;
+      }
+
+      .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .dashboard-subtitle {
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      /* Profile Section */
+      .profile-section {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .profile-content {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-avatar:hover {
+        transform: scale(1.05);
+      }
+
+      .edit-icon {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: #667eea;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .edit-icon:hover {
+        background: #5a67d8;
+      }
+
+      .profile-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .info-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .info-label {
+        font-size: 0.9rem;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .info-value {
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: 600;
+        padding: 8px 0;
+      }
+
+      .profile-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .stat-item {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: translateY(-2px);
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Section Headers */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .section-action {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .section-action:hover {
+        color: #5a67d8;
+      }
+
+      /* Listings Section */
+      .listings-section {
+        margin-bottom: 50px;
+      }
+
+      .listings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .listing-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .listing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .listing-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        position: relative;
+      }
+
+      .listing-status {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .status-active {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status-pending {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .status-sold {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .listing-info {
+        padding: 20px;
+      }
+
+      .listing-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .listing-details {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .listing-points {
+        color: #667eea;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .listing-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .action-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-edit {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-edit:hover {
+        background: #5a67d8;
+      }
+
+      .btn-delete {
+        background: #dc3545;
+        color: white;
+      }
+
+      .btn-delete:hover {
+        background: #c82333;
+      }
+
+      /* Purchases Section */
+      .purchases-section {
+        margin-bottom: 50px;
+      }
+
+      .purchase-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .purchase-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .purchase-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        position: relative;
+      }
+
+      .purchase-date {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .purchase-info {
+        padding: 20px;
+      }
+
+      .purchase-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .purchase-details {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .purchase-points {
+        color: #667eea;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+      }
+
+      .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .empty-text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .empty-action {
+        display: inline-block;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+      }
+
+      .empty-action:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 968px) {
+        .profile-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .profile-info {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-stats {
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .listings-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .dashboard-title {
+          font-size: 2rem;
+        }
+
+        .profile-section {
+          padding: 20px;
+        }
+
+        .profile-avatar {
+          width: 100px;
+          height: 100px;
+          font-size: 2.5rem;
+        }
+
+        .section-header {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .listings-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-content {
+          flex-direction: column;
+          height: auto;
+          padding: 15px 20px;
+        }
+
+        .user-menu {
+          margin-top: 15px;
+        }
+
+        .main-content {
+          padding: 20px 15px;
+        }
+
+        .profile-content {
+          gap: 20px;
+        }
+
+        .profile-stats {
+          flex-direction: column;
+        }
+
+        .listings-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .listing-actions {
+          flex-direction: column;
+        }
+
+        .action-btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <a href="#" class="logo">ReWear</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#browse">Browse</a></li>
+            <li><a href="#dashboard" style="color: #667eea">Dashboard</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="user-menu">
+          <div class="points-badge">💎 285 Points</div>
+          <div class="user-avatar">SJ</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Welcome back, Sarah!</h1>
+        <p class="dashboard-subtitle">
+          Manage your listings and track your exchanges
+        </p>
+      </div>
+
+      <!-- Profile Section -->
+      <section class="profile-section">
+        <div class="profile-content">
+          <div class="profile-avatar">
+            👤
+            <div class="edit-icon">✏️</div>
+          </div>
+          <div class="profile-info">
+            <div class="info-group">
+              <span class="info-label">Full Name</span>
+              <span class="info-value">Sarah Johnson</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Email</span>
+              <span class="info-value">sarah.johnson@email.com</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Member Since</span>
+              <span class="info-value">March 2023</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Location</span>
+              <span class="info-value">New York, NY</span>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-item">
+              <div class="stat-number">285</div>
+              <div class="stat-label">Total Points</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">4.9</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">47</div>
+              <div class="stat-label">Trades</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- My Listings Section -->
+      <section class="listings-section">
+        <div class="section-header">
+          <h2 class="section-title">My Listings</h2>
+          <a href="#" class="section-action">+ Add New Listing</a>
+        </div>
+        <div class="listings-grid">
+          <div class="listing-card">
+            <div class="listing-image">
+              👗
+              <div class="listing-status status-active">Active</div>
+            </div>
+            <div class="listing-info">
+              <div class="listing-title">Floral Maxi Dress</div>
+              <div class="listing-details">
+                Size M • Zara • Excellent condition
+              </div>
+              <div class="listing-points">50 Points</div>
+              <div class="listing-actions">
+                <button class="action-btn btn-edit">Edit</button>
+                <button class="action-btn btn-delete">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="listing-card">
+            <div class="listing-image">
+              🧥
+              <div class="listing-status status-pending">Pending</div>
+            </div>
+            <div class="listing-info">
+              <div class="listing-title">Vintage Leather Jacket</div>
+              <div class="listing-details">
+                Size L • Genuine Leather • Good condition
+              </div>
+              <div class="listing-points">120 Points</div>
+              <div class="listing-actions">
+                <button class="action-btn btn-edit">Edit</button>
+                <button class="action-btn btn-delete">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="listing-card">
+            <div class="listing-image">
+              👔
+              <div class="listing-status status-sold">Traded</div>
+            </div>
+            <div class="listing-info">
+              <div class="listing-title">Business Blazer</div>
+              <div class="listing-details">Size S • Hugo Boss • Like new</div>
+              <div class="listing-points">90 Points</div>
+              <div class="listing-actions">
+                <button class="action-btn btn-edit">View</button>
+                <button class="action-btn btn-delete">Archive</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="listing-card">
+            <div class="listing-image">
+              👚
+              <div class="listing-status status-active">Active</div>
+            </div>
+            <div class="listing-info">
+              <div class="listing-title">Casual Blouse</div>
+              <div class="listing-details">
+                Size M • Cotton • Excellent condition
+              </div>
+              <div class="listing-points">25 Points</div>
+              <div class="listing-actions">
+                <button class="action-btn btn-edit">Edit</button>
+                <button class="action-btn btn-delete">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- My Purchases Section -->
+      <section class="purchases-section">
+        <div class="section-header">
+          <h2 class="section-title">My Purchases</h2>
+          <a href="#" class="section-action">View All</a>
+        </div>
+        <div class="listings-grid">
+          <div class="purchase-card">
+            <div class="purchase-image">
+              👗
+              <div class="purchase-date">5 days ago</div>
+            </div>
+            <div class="purchase-info">
+              <div class="purchase-title">Summer Floral Dress</div>
+              <div class="purchase-details">
+                Size M • H&M • Excellent condition
+              </div>
+              <div class="purchase-points">45 Points</div>
+            </div>
+          </div>
+
+          <div class="purchase-card">
+            <div class="purchase-image">
+              👟
+              <div class="purchase-date">2 weeks ago</div>
+            </div>
+            <div class="purchase-info">
+              <div class="purchase-title">White Sneakers</div>
+              <div class="purchase-details">Size 8 • Nike • Good condition</div>
+              <div class="purchase-points">60 Points</div>
+            </div>
+          </div>
+
+          <div class="purchase-card">
+            <div class="purchase-image">
+              👜
+              <div class="purchase-date">1 month ago</div>
+            </div>
+            <div class="purchase-info">
+              <div class="purchase-title">Designer Handbag</div>
+              <div class="purchase-details">Michael Kors • Like new</div>
+              <div class="purchase-points">95 Points</div>
+            </div>
+          </div>
+
+          <div class="purchase-card">
+            <div class="purchase-image">
+              🩳
+              <div class="purchase-date">1 month ago</div>
+            </div>
+            <div class="purchase-info">
+              <div class="purchase-title">Denim Shorts</div>
+              <div class="purchase-details">
+                Size S • Levi's • Good condition
+              </div>
+              <div class="purchase-points">30 Points</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Profile avatar click handler
+      document
+        .querySelector(".profile-avatar")
+        .addEventListener("click", function () {
+          alert("Profile picture upload would open here");
+        });
+
+      // Edit icon click handler
+      document
+        .querySelector(".edit-icon")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+          alert("Edit profile form would open here");
+        });
+
+      // Add new listing button
+      document
+        .querySelector(".section-action")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          alert("Add new listing form would open here");
+        });
+
+      // Listing card actions
+      document.querySelectorAll(".btn-edit").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const listingTitle = this.closest(
+            ".listing-card, .purchase-card"
+          ).querySelector(".listing-title, .purchase-title").textContent;
+          alert(`Edit/View: ${listingTitle}`);
+        });
+      });
+
+      document.querySelectorAll(".btn-delete").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const listingTitle =
+            this.closest(".listing-card").querySelector(
+              ".listing-title"
+            ).textContent;
+          if (confirm(`Are you sure you want to delete "${listingTitle}"?`)) {
+            alert("Item deleted successfully");
+          }
+        });
+      });
+
+      // Listing card click handlers
+      document
+        .querySelectorAll(".listing-card, .purchase-card")
+        .forEach((card) => {
+          card.addEventListener("click", function () {
+            const title = this.querySelector(
+              ".listing-title, .purchase-title"
+            ).textContent;
+            alert(`Viewing details for: ${title}`);
+          });
+        });
+
+      // Stats hover effects
+      document.querySelectorAll(".stat-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.background = "#667eea";
+          this.style.color = "white";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.background = "#f8f9fa";
+          this.style.color = "";
+        });
+      });
+    </script>
+  </body>
+</html>
